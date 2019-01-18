@@ -1,28 +1,42 @@
 package com.company;
 
 public class binarySearch {
-    public static int binarySearch(int[] elements, int target) {
-        int max = elements[elements.length - 1];
-        int min = elements[0];
-        int tarValue = (elements[0] + elements[elements.length - 1]) / 2;
-        int tarInd = 0;
-        for (int i = 0; i < elements.length; i++) {
-            if (tarValue > target) {
-                max = tarValue;
-                tarValue = (min + max) / 2;
-            }
-            if (tarValue < target) {
-                min = tarValue;
-                tarValue = (min + max) / 2;
-            }
-            if (elements[i] == tarValue && tarValue == target) {
-                tarInd = i;
-            }
-            else if(elements[i]!=tarValue && tarValue==target){
-                tarInd =-1;
-            }
 
+    public static int binarySearch(int[] elements, int target) {
+        bubbleSort.bubbleSortII(elements);
+        int max =elements.length-1;
+        int min = 0;
+        for (int i = (min+max)/2; min<=max;i=(min+max)/2 ) {
+            if (elements[i] == target) {
+                return i;
+            } else if (elements[i] > target) {
+                max = i - 1;
+            } else if (elements[i] < target) {
+                min = i + 1;
+            }
         }
-        return tarInd;
+        return -1;
     }
+    public static int binarySearch2(int[] elements, int target){
+        bubbleSort.bubbleSortII(elements);
+        int max =elements.length-1;
+        int min = 0;
+        int guess = (min+max)/2;
+        boolean checker = true;
+        while(min<=max){
+            if(elements[guess]==target){
+                return guess;
+            }
+            else if(elements[guess]>target){
+                max = guess-1;
+                guess = (min+max)/2;
+            }
+            else if(elements[guess]<target){
+                min=guess+1;
+                guess=(min+max)/2;
+            }
+        }
+        return -1;
+    }
+
 }
